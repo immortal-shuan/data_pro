@@ -1,6 +1,6 @@
 import os
 import json
-import argparse
+from tqdm import tqdm
 
 
 def JsonRead(path):
@@ -35,9 +35,25 @@ def textRead(path):
     return text
 
 
+def fileRead(path, label=None):
+    file_name_list = os.listdir(path)
+    text_list = []
+    for file_name in tqdm(file_name_list):
+        file_path = os.path.join(path, file_name)
+        text = textRead(file_path)
+        if label == None:
+            text_list.append(text)
+        else:
+            text_list.append([text, label])
+    return text_list
+
+
 def p(data, num=5):
     for i in range(num):
         print(data[i])
+
+
+
 
 
 
