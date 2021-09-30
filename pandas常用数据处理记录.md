@@ -16,4 +16,18 @@ data_1 = data1.loc[:, [' Label']]
 ```
 data['Label'] = data[' Label'].map({'BENIGN': 0, 'FTP-Patator': 1, 'SSH-Patator': 2})
 ```
+删除部分元素
+
+axis=0时，删除行，axis=1，删除列。
+```
+data.drop(' Label', axis=1, inplace=True)
+```
+
+
+
+
+
+
+
+
 
