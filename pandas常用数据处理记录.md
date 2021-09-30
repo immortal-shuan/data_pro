@@ -12,5 +12,8 @@ data1.info()
 ```
 data_1 = data1.loc[:, [' Label']]
 ```
-
+将其中一列数据的某些值映射成其他值
+```
+data['Label'] = data[' Label'].map({'BENIGN': 0, 'FTP-Patator': 1, 'SSH-Patator': 2})
+```
 
