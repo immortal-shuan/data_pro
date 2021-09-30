@@ -8,6 +8,9 @@ data1 = pd.read_csv(data_path1)
 ```
 data1.info()
 ```
-
+取出单独的一列
+```
+data_1 = data1.loc[:, [' Label']]
+```
 
 
