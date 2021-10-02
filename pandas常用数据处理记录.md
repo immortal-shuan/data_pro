@@ -22,6 +22,12 @@ axis=0时，删除行，axis=1，删除列。
 ```
 data.drop(' Label', axis=1, inplace=True)
 ```
+对dataframe中的数据以列为单位进行标准化
+```
+data_feature = (data_feature - data_feature.min())/(data_feature.max()-data_feature.min())
+```
+
+
 
 
 
