@@ -53,7 +53,7 @@ class baidutranslate(object):
         return out
 
 
-def textReadOneEach(path):
+def OrigtextRead(path):
     data = []
     with open(path, encoding='utf-8', mode='r') as f:
         for line in f:
@@ -65,6 +65,21 @@ def textReadOneEach(path):
     return data
 
 
+def textsetRead(path):
+    data = []
+    with open(path, encoding='utf-8', mode='r') as f:
+        for line in f:
+            data.append(line.strip())
+        f.close()
+    return data
+
+
+def SaveTxtSet(data, path):
+    with open(path, mode='a', encoding='utf-8') as f:
+        for sample in data:
+            f.write(str(sample) + '\n')
+        f.close()
+
 def textSet(data):
     out = []
     for sample in data:
@@ -74,12 +89,12 @@ def textSet(data):
 
 
 def backtranslatelist(data, med_lang):
-    for i in trange(239600, len(data), 200):
+    for i in trange(112000, len(data), 200):
         temp_data = data[i:i+200]
         trans = baidutranslate('zh', med_lang)
         trans_text = trans.back_translate(temp_data)
         time.sleep(1)
-        SaveToJson(trans_text, 'txt{}.json'.format(i))
+        SaveToJson(trans_text, 'F:/data/NLPdata/LCQMC/txt_{}{}.json'.format(med_lang,i))
         print(i)
 
 
@@ -88,12 +103,14 @@ def SaveToJson(data, path):
         json.dump(data, f, ensure_ascii=False)
     f.close()
 
-
-data_path = 'G:/similarity_match/data/train'
-data_type = ['BQ', 'LCQMC', 'OPPO']
-data_file = os.path.join(data_path, data_type[1], 'train')
-print(data_file)
-data = textReadOneEach(data_file)
-data_set = textSet(data)
-
+'''
+因为元组每次的顺序都不一样，所以我先存储在读取，之后每次在处理200个数据
+'''
+# data_path = 'G:/similarity_match/data/train'
+# data_type = ['BQ', 'LCQMC', 'OPPO']
+# data_file = os.path.join(data_path, data_type[1], 'train')
+# data = OrigtextRead(data_file)
+# data_set = textSet(data)
+# SaveTxtSet(data_set, 'F:/data/NLPdata/LCQMC/textset.txt')
+data_set = textsetRead('F:/data/NLPdata/LCQMC/textset.txt')
 backtranslatelist(data_set, 'en')
