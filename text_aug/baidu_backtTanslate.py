@@ -87,9 +87,10 @@ def textSet(data):
         out.append(sample[1])
     return list(set(out))
 
-
+# 因为存在不稳定的现象，所以我是每批次200数据处理完就存储
 def backtranslatelist(data, med_lang):
-    for i in trange(112000, len(data), 200):
+    # 断掉的话，从哪断，就改0位置的数字为哪就行
+    for i in trange(0, len(data), 200):
         temp_data = data[i:i+200]
         trans = baidutranslate('zh', med_lang)
         trans_text = trans.back_translate(temp_data)
